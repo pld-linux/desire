@@ -13,6 +13,7 @@ URL:		http://www.spelio.net.ru/soft/#DESIRE
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	db3-devel
+BuildRequires:	fhs-compliance
 BuildRequires:	gd-devel >= 2.0.1
 BuildRequires:	gd-static >= 2.0.1
 BuildRequires:	libstrfunc-devel
