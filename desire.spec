@@ -5,13 +5,6 @@ Version:	3.1
 Release:	0.6
 License:	BSD-like
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Source0:	http://www.spelio.net.ru/soft/%{name}-%{version}.tar.gz
 Patch0:		%{name}-QnD.patch
 Patch1:		%{name}-DESTDIR.patch
@@ -40,13 +33,6 @@ rysowania, libddraw, konfigurowaln╠ w locie.
 Summary:	Development part of the desire library
 Summary(pl):	CzЙ╤Ф biblioteki desire przeznaczona dla developerСw
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -61,13 +47,6 @@ bibliotek╠ desire.
 Summary:	Static desire library
 Summary(pl):	Statyczna biblioteka desire
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -80,8 +59,6 @@ Ten pakiet zawiera statyczn╠ bibliotekЙ desire.
 Summary:	Utility programs that use desire
 Summary(pl):	NarzЙdzia ktСre u©ywaj╠ desire
 Group:		Applications
-Group(de):	Applikationen
-Group(pl):	Aplikacje
 Requires:	%{name} = %{version}
 Requires:	apache
 
