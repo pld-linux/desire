@@ -2,7 +2,7 @@ Summary:	DESIRE - statistics access library
 Summary(pl):	DESIRE - biblioteka, statystyka dostêpu
 Name:		desire
 Version:	3.1
-Release:	0.6
+Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://www.spelio.net.ru/soft/%{name}-%{version}.tar.gz
@@ -11,11 +11,11 @@ Patch1:		%{name}-DESTDIR.patch
 URL:		http://www.spelio.net.ru/soft/#DESIRE
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libtool
+BuildRequires:	db3-devel
 BuildRequires:	gd-devel >= 2.0.1
 BuildRequires:	gd-static >= 2.0.1
 BuildRequires:	libstrfunc-devel
-BuildRequires:	db3-devel
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_cgidir		/home/httpd/cgi-bin
@@ -89,12 +89,11 @@ aclocal
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_cgidir}/{cistat,proxy_stats} \
+	$RPM_BUILD_ROOT%{_logdir}/{calls,traffic,dialup/Usres,proxy/Domains}
 
 %{__make} install \
         DESTDIR=$RPM_BUILD_ROOT
-
-install -d $RPM_BUILD_ROOT%{_cgidir}/{cistat,proxy_stats}
-install -d $RPM_BUILD_ROOT%{_logdir}/{calls,traffic,dialup/Usres,proxy/Domains}
 
 install depend/cistat/html/* $RPM_BUILD_ROOT%{_cgidir}/cistat
 install depend/proxy_stats/html/* $RPM_BUILD_ROOT%{_cgidir}/proxy_stats
