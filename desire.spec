@@ -81,7 +81,7 @@ Tutaj s± programy dostarczone z desire:
 
 %build
 rm -f ltmain.sh aclocal.m4
-libtoolize --copy --force
+%{__libtoolize}
 aclocal
 %{__autoconf}
 %configure
