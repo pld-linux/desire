@@ -2,7 +2,7 @@ Summary:	DESIRE - statistics access library
 Summary(pl):	DESIRE - biblioteka, statysytyka dostepu 
 Name:		desire
 Version:	3.1
-Release:	0.4
+Release:	0.5
 License:	???
 Group:		Libraries
 Group(de):	Libraries
@@ -12,8 +12,8 @@ Source0:	http://www.spelio.net.ru/soft/desire-3.1.tar.gz
 Patch0:		%{name}-QnD.patch
 Patch1:		%{name}-DESTDIR.patch
 BuildRequires:	autoconf
-BuildRequires:	gd-devel
-BuildRequires:	gd-static
+BuildRequires:	gd-devel >= 2.0.1
+BuildRequires:	gd-static >= 2.0.1
 BuildRequires:	libstrfunc-devel
 BuildRequires:	db3-devel
 
@@ -75,6 +75,9 @@ These are utility programs supplied with desire.
 %patch1 -p1
 
 %build
+rm -f ltmain.sh aclocal.m4
+libtoolize --copy --force
+aclocal
 autoconf
 %configure
 %{__make}
