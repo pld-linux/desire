@@ -2,7 +2,7 @@ Summary:	DESIRE - statistics access library
 Summary(pl):	DESIRE - biblioteka, statystyka dostêpu
 Name:		desire
 Version:	3.1
-Release:	1
+Release:	2
 License:	BSD-like
 Group:		Libraries
 Source0:	http://www.spelio.net.ru/soft/%{name}-%{version}.tar.gz
@@ -19,7 +19,7 @@ BuildRequires:	libstrfunc-devel
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_cgidir		/home/services/httpd/cgi-bin
+%define		_cgidir		/srv/httpd/cgi-bin
 %define		_logdir		/var/log/desire
 
 %description
