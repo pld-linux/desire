@@ -1,0 +1,135 @@
+diff -Nur desire-3.1/depend/cistat/Makefile.in desire-3.1.new/depend/cistat/Makefile.in
+--- desire-3.1/depend/cistat/Makefile.in	Mon Apr  9 10:35:54 2001
++++ desire-3.1.new/depend/cistat/Makefile.in	Mon May 21 14:45:30 2001
+@@ -6,6 +6,7 @@
+ libdir=@libdir@
+ includedir=@includedir@
+ sysconfdir=@sysconfdir@
++weblocation=/home/httpd/cgi-bin/cistat
+ 
+ LIBS+= -L../../libdesire/.libs
+ LIBS+= -L../../libddraw/.libs
+@@ -46,13 +47,11 @@
+ 	rm -f *.o *.core ${TARGETS} 1
+ 
+ install: all
+-	${INSTALL} -m 555 cistat ${bindir}
+-	${INSTALL} -m 555 cidraw.cgi /www/admin/traffic
+-	${INSTALL} -m 555 ./html/index.html ./html/form.cgi /www/admin/traffic
+-	@echo
+-	@echo Now you might want to make install-conf from ./depend/cistat
+-	@echo
+-
+-install-conf:
+-	${INSTALL} -m 444 -g 0 -o 0 cistat.conf ${sysconfdir}
++	install -d $(DESTDIR)${bindir}
++	install -d $(DESTDIR)${weblocation}
++	install -d $(DESTDIR)${sysconfdir}
++	${INSTALL} -m 555 cistat $(DESTDIR)${bindir}
++	${INSTALL} -m 555 cidraw.cgi $(DESTDIR)${weblocation}
++	${INSTALL} -m 555 ./html/* ./html/form.cgi $(DESTDIR)${weblocation}
++	${INSTALL} -m 444  cistat.conf $(DESTDIR)${sysconfdir}
+ 
+diff -Nur desire-3.1/depend/ctbdump/Makefile.in desire-3.1.new/depend/ctbdump/Makefile.in
+--- desire-3.1/depend/ctbdump/Makefile.in	Mon Apr  9 10:35:54 2001
++++ desire-3.1.new/depend/ctbdump/Makefile.in	Mon May 21 14:43:36 2001
+@@ -21,7 +21,8 @@
+ 	${CC} ${CFLAGS} -o ctbdump ctbdump.c ${LIBS}
+ 
+ install: all
+-	${INSTALL} -m 555 -g 0 -o 0 ctbdump ${bindir}
++	install -d $(DESTDIR)${bindir}
++	${INSTALL} -m 555 ctbdump $(DESTDIR)${bindir}
+ 
+ clean:
+ 	rm -f *.o *.core ctbdump 1
+diff -Nur desire-3.1/depend/ctbmap/Makefile.in desire-3.1.new/depend/ctbmap/Makefile.in
+--- desire-3.1/depend/ctbmap/Makefile.in	Mon Apr  9 10:35:55 2001
++++ desire-3.1.new/depend/ctbmap/Makefile.in	Mon May 21 14:43:36 2001
+@@ -21,7 +21,8 @@
+ 	${CC} ${CFLAGS} -o ctbmap ctbmap.c ${LIBS}
+ 
+ install: all
+-	${INSTALL} -m 555 -g 0 -o 0 ctbmap ${bindir}
++	install -d $(DESTDIR)${bindir}
++	${INSTALL} -m 555 ctbmap $(DESTDIR)${bindir}
+ 
+ clean:
+ 	rm -f *.o *.core ctbmap 1
+diff -Nur desire-3.1/depend/proxy_stats/Makefile.in desire-3.1.new/depend/proxy_stats/Makefile.in
+--- desire-3.1/depend/proxy_stats/Makefile.in	Mon Apr  9 10:35:55 2001
++++ desire-3.1.new/depend/proxy_stats/Makefile.in	Mon May 21 14:44:39 2001
+@@ -6,7 +6,7 @@
+ includedir=@includedir@
+ sysconfdir=@sysconfdir@
+ 
+-WEBLOCATION=/www/admin/proxy
++WEBLOCATION=/home/httpd/cgi-bin/proxy_stats
+ 
+ CC=@CC@
+ 
+@@ -45,16 +45,12 @@
+ 	${CC} ${CFLAGS} -o $@ -c $<
+ 
+ install: all
+-	${INSTALL} -m 555 proxy_getstat ${bindir}
+-	@if [ ! -d ${WEBLOCATION} ]; then \
+-	  echo; \
+-	  echo "ERROR: proxy_draw cannot be installed due to directory absence: ${WEBLOCATION}"; \
+-	  echo; \
+-	else \
+-	  ${INSTALL} -m 555 -g 0 -o 0 proxy_draw.cgi ${WEBLOCATION}; \
+-	  ${INSTALL} -m 555 -g 0 -o 0 proxy_top.cgi ${WEBLOCATION}; \
+-	  ${INSTALL} -m 555 -g 0 -o 0 ./html/form.cgi ${WEBLOCATION}; \
+-	fi
++	install -d $(DESTDIR)${bindir}
++	${INSTALL} -m 555 proxy_getstat $(DESTDIR)${bindir}
++	install -d $(DESTDIR)${WEBLOCATION}
++	${INSTALL} -m 555  proxy_draw.cgi $(DESTDIR)${WEBLOCATION}
++	${INSTALL} -m 555  proxy_top.cgi $(DESTDIR)${WEBLOCATION}
++	${INSTALL} -m 555 ./html/* $(DESTDIR)${WEBLOCATION}
+ 
+ clean:
+ 	rm -f *.o *.core ${TARGETS} 1
+diff -Nur desire-3.1/libddraw/Makefile.in desire-3.1.new/libddraw/Makefile.in
+--- desire-3.1/libddraw/Makefile.in	Mon Apr  9 10:35:54 2001
++++ desire-3.1.new/libddraw/Makefile.in	Mon May 21 14:43:36 2001
+@@ -42,11 +42,12 @@
+ 	$(LIBTOOL) ${CC} ${CFLAGS} -c $<
+ 
+ install: all
+-	$(LIBTOOL) ${INSTALL} -m 444 ./.libs/lib${LIB}.a ${libdir}
+-	rm -f ${libdir}/${SHLIB_NAME} ${libdir}/${SHLIB_LINK}
+-	$(LIBTOOL) ${INSTALL} -m 444 ./.libs/${SHLIB_NAME} ${libdir}
+-	${LN_SF} ${SHLIB_NAME} ${libdir}/${SHLIB_LINK}
+-	${INSTALL} -m 444 -o 0 -g 0 ../include/ddraw.h ${includedir}
++	install -d $(DESTDIR)${libdir}
++	install -d $(DESTDIR)${includedir}
++	$(LIBTOOL) ${INSTALL} -m 444 ./.libs/lib${LIB}.a $(DESTDIR)${libdir}
++	$(LIBTOOL) ${INSTALL} -m 444 ./.libs/${SHLIB_NAME} $(DESTDIR)${libdir}
++	${LN_SF} ${SHLIB_NAME} $(DESTDIR)${libdir}/${SHLIB_LINK}
++	${INSTALL} -m 444 ../include/ddraw.h $(DESTDIR)${includedir}
+ 
+ clean:
+ 	rm -f *.o *.a *.lo *.la ${SHLIB_NAME} ${SHLIB_LINK} *.core
+diff -Nur desire-3.1/libdesire/Makefile.in desire-3.1.new/libdesire/Makefile.in
+--- desire-3.1/libdesire/Makefile.in	Mon Apr  9 10:35:53 2001
++++ desire-3.1.new/libdesire/Makefile.in	Mon May 21 14:43:36 2001
+@@ -54,11 +54,12 @@
+ 
+ 
+ install: all
+-	$(LIBTOOL) ${INSTALL} -m 444 ./.libs/lib${LIB}.a ${libdir}
+-	rm -f ${libdir}/${SHLIB_NAME} ${libdir}/${SHLIB_LINK}
+-	$(LIBTOOL) ${INSTALL} -m 444 ./.libs/${SHLIB_NAME} ${libdir}
+-	${LN_SF} ${SHLIB_NAME} ${libdir}/${SHLIB_LINK}
+-	${INSTALL} -m 444 ../include/desire.h ${includedir}
++	install -d $(DESTDIR)/${libdir}
++	install -d $(DESTDIR)/${includedir}
++	$(LIBTOOL) ${INSTALL} -m 444 ./.libs/lib${LIB}.a $(DESTDIR)${libdir}
++	$(LIBTOOL) ${INSTALL} -m 444 ./.libs/${SHLIB_NAME} $(DESTDIR)${libdir}
++	${LN_SF} ${SHLIB_NAME} $(DESTDIR)${libdir}/${SHLIB_LINK}
++	${INSTALL} -m 444 ../include/desire.h $(DESTDIR)${includedir}
+ 
+ clean:
+ 	rm -f *.o *.lo *.la *.a ${SHLIB_NAME} ${SHLIB_LINK} *.core

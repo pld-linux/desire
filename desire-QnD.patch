@@ -1,0 +1,227 @@
+diff -Nur desire-3.1/conf/desire.conf desire-3.1.new/conf/desire.conf
+--- desire-3.1/conf/desire.conf	Mon Apr  9 10:35:53 2001
++++ desire-3.1.new/conf/desire.conf	Tue May 22 11:05:46 2001
+@@ -1,10 +1,10 @@
+ 
+ 
+-folder="/adm/stat";
++folder="/var/log/desire";
+ 
+ service "dialup" {
+ 	folder = "dialup";
+-	map U2 = "/adm/stat/dialup/Users";
++	map U2 = "dialup/Users";
+ };
+ 
+ service "traffic" {
+@@ -16,13 +16,13 @@
+ service "proxy" {
+ 	folder = "proxy";
+ 	description = "Proxy statistics";
+-	map Dst = "/adm/stat/proxy/Domains";
++	map Dst = "proxy/Domains";
+ };
+ 
+ service "email" {
+ 	folder = "email";
+ 	description = "Mail accounting";
+-	map Src = "/adm/etc/DOMAINS"
++	map Src = "/etc/DOMAINS"
+ };
+ 
+ service "calls" {
+diff -Nur desire-3.1/configure.in desire-3.1.new/configure.in
+--- desire-3.1/configure.in	Mon Apr  9 10:35:55 2001
++++ desire-3.1.new/configure.in	Tue May 22 11:01:05 2001
+@@ -65,6 +65,6 @@
+ AC_FUNC_MMAP
+ AC_CHECK_FUNCS(mkdir mktime strdup strerror strspn strstr getrusage flock fcntl dbopen dbm_open logf expf gdImagePng gdImageGif)
+ 
+-AC_OUTPUT(libdesire/Makefile libddraw/Makefile depend/proxy_stats/Makefile depend/ctbdump/Makefile depend/ctbmap/Makefile depend/cistat/Makefile depend/Makefile Makefile depend/mail_stats/Makefile)
++AC_OUTPUT(libdesire/Makefile libddraw/Makefile depend/proxy_stats/Makefile depend/ctbdump/Makefile depend/ctbmap/Makefile depend/cistat/Makefile depend/Makefile Makefile)
+ 
+ 
+diff -Nur desire-3.1/depend/cistat/Makefile.in desire-3.1.new/depend/cistat/Makefile.in
+--- desire-3.1/depend/cistat/Makefile.in	Mon Apr  9 10:35:54 2001
++++ desire-3.1.new/depend/cistat/Makefile.in	Tue May 22 11:01:05 2001
+@@ -9,7 +9,7 @@
+ 
+ LIBS+= -L../../libdesire/.libs
+ LIBS+= -L../../libddraw/.libs
+-LIBS+= -L${libdir}
++LIBS+= -L${libdir} -L/usr/lib
+ LIBS+= -ldesire
+ LIBS+= -lstrfunc
+ 
+@@ -19,7 +19,7 @@
+ 
+ CC=@CC@
+ CFLAGS+= -Wall @CFLAGS@ @DEFS@
+-CFLAGS+= -I../../include -I${includedir}
++CFLAGS+= -I../../include -I${includedir} -I/usr/include
+ 
+ INSTALL=@INSTALL@
+ 
+diff -Nur desire-3.1/depend/cistat/cidraw.c desire-3.1.new/depend/cistat/cidraw.c
+--- desire-3.1/depend/cistat/cidraw.c	Mon Apr  9 10:35:54 2001
++++ desire-3.1.new/depend/cistat/cidraw.c	Tue May 22 11:01:05 2001
+@@ -131,11 +131,7 @@
+ 	if(isatty(1))
+ 		fprintf(stderr, "[Image will be displayed here]\n");
+ 	else {
+-#ifdef	HAVE_GDIMAGEPNG
+ 		gdImagePng(im, stdout);
+-#else
+-		gdImageGif(im, stdout);
+-#endif
+ 	}
+ 
+ 	return 0;
+diff -Nur desire-3.1/depend/cistat/cistat.c desire-3.1.new/depend/cistat/cistat.c
+--- desire-3.1/depend/cistat/cistat.c	Mon Apr  9 10:35:54 2001
++++ desire-3.1.new/depend/cistat/cistat.c	Tue May 22 11:01:05 2001
+@@ -211,7 +211,7 @@
+ 	nets *nh;
+ 	int sscnt;
+ 
+-	if(!(cf=fopen("/usr/local/etc/cistat.conf", "r")))
++	if(!(cf=fopen("/etc/cistat.conf", "r")))
+ 		sux("Can't read config.");
+ 
+ 	while(fgets(buf, sizeof(buf), cf)) {
+diff -Nur desire-3.1/depend/cistat/html/form.cgi desire-3.1.new/depend/cistat/html/form.cgi
+--- desire-3.1/depend/cistat/html/form.cgi	Mon Apr  9 10:35:54 2001
++++ desire-3.1.new/depend/cistat/html/form.cgi	Tue May 22 11:07:15 2001
+@@ -18,7 +18,7 @@
+ <SELECT NAME=file>
+ ";
+ 
+-opendir(D, "/adm/stat/traffic");
++opendir(D, "/var/log/desire/traffic");
+ readdir(D); readdir(D);
+ 
+ for (sort(readdir(D))) {
+diff -Nur desire-3.1/depend/proxy_stats/Makefile.in desire-3.1.new/depend/proxy_stats/Makefile.in
+--- desire-3.1/depend/proxy_stats/Makefile.in	Mon Apr  9 10:35:55 2001
++++ desire-3.1.new/depend/proxy_stats/Makefile.in	Tue May 22 11:01:05 2001
+@@ -11,12 +11,12 @@
+ CC=@CC@
+ 
+ CFLAGS+= @CFLAGS@ @DEFS@ -Wall
+-CFLAGS+= -I../../include -I${includedir}
++CFLAGS+= -I../../include -I${includedir} -I/usr/include -I/usr/X11R6/include
+ 
+ LDAPLIBS= @LDAPLIBS@
+ NETLIBS= @NETLIBS@
+ 
+-LDFLAGS= -L../../libdesire/.libs -L../../libddraw/.libs @LDFLAGS@
++LDFLAGS= -L../../libdesire/.libs -L../../libddraw/.libs @LDFLAGS@ -L/usr/lib -L/usr/X11R6/lib
+ LIBS= -lddraw -ldesire @LIBS@
+ 
+ INSTALL=@INSTALL@
+diff -Nur desire-3.1/depend/proxy_stats/proxy_draw.c desire-3.1.new/depend/proxy_stats/proxy_draw.c
+--- desire-3.1/depend/proxy_stats/proxy_draw.c	Mon Apr  9 10:35:55 2001
++++ desire-3.1.new/depend/proxy_stats/proxy_draw.c	Tue May 22 11:01:05 2001
+@@ -309,11 +309,7 @@
+ 	if(isatty(1))
+ 		fprintf(stderr, "[Image will be displayed here]\n");
+ 	else {
+-#ifdef	HAVE_GDIMAGEPNG
+ 		gdImagePng(im, stdout);
+-#else
+-		gdImageGif(im, stdout);
+-#endif
+ 	}
+ 
+ 	gdImageDestroy(im);
+diff -Nur desire-3.1/include/desire.h desire-3.1.new/include/desire.h
+--- desire-3.1/include/desire.h	Mon Apr  9 10:35:54 2001
++++ desire-3.1.new/include/desire.h	Tue May 22 11:01:05 2001
+@@ -86,7 +86,7 @@
+ 
+ ctb_session *
+ ctb_open(
+-	const char *optConfigName,	/* /usr/local/etc/desire.conf */
++	const char *optConfigName,	/* /etc/desire.conf */
+ 	const char *Service,	/* Service name */
+ 	const char *optName	/* Optional subdestination name */
+ );
+diff -Nur desire-3.1/libddraw/Makefile.in desire-3.1.new/libddraw/Makefile.in
+--- desire-3.1/libddraw/Makefile.in	Mon Apr  9 10:35:54 2001
++++ desire-3.1.new/libddraw/Makefile.in	Tue May 22 11:01:05 2001
+@@ -10,7 +10,7 @@
+ LIBTOOL= PATH=@PATH@ @LIBTOOL@
+ 
+ CFLAGS= -Wall @CFLAGS@ @DEFS@
+-CFLAGS+= -I../include -I${includedir}
++CFLAGS+= -I../include -I${includedir} -I/usr/X11R6/include
+ OBJS= param.o ddraw.o
+ LOBJS+= ${OBJS}
+ 
+diff -Nur desire-3.1/libddraw/param.c desire-3.1.new/libddraw/param.c
+--- desire-3.1/libddraw/param.c	Mon Apr  9 10:35:54 2001
++++ desire-3.1.new/libddraw/param.c	Tue May 22 11:01:05 2001
+@@ -1,7 +1,7 @@
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <string.h>
+-#include <sys/time.h>
++#include <time.h>
+ 
+ #include <strfunc.h>
+ 
+diff -Nur desire-3.1/libdesire/ctbget.c desire-3.1.new/libdesire/ctbget.c
+--- desire-3.1/libdesire/ctbget.c	Mon Apr  9 10:35:54 2001
++++ desire-3.1.new/libdesire/ctbget.c	Tue May 22 11:01:05 2001
+@@ -4,6 +4,7 @@
+ #include <sys/stat.h>
+ #include <unistd.h>
+ #include <fcntl.h>
++#include <time.h>
+ 
+ #include "desire.h"
+ #include "ctbint.h"
+diff -Nur desire-3.1/libdesire/session.h desire-3.1.new/libdesire/session.h
+--- desire-3.1/libdesire/session.h	Mon Apr  9 10:35:54 2001
++++ desire-3.1.new/libdesire/session.h	Tue May 22 11:01:05 2001
+@@ -11,34 +11,17 @@
+ #include "config.h"
+ #endif
+ 
+-#ifdef	HAVE_DBOPEN
+-
+-#ifdef	HAVE_DB_H
+ #include <db.h>
+-#endif
+ 
+ typedef	DB	DBMAP;
+ typedef DBT	DBCHUNK;
+ #define	map_data data
+ #define	map_size size
+ 
+-#else	/* HAVE_DBOPEN */
+-#ifdef	HAVE_DBM_OPEN
+-
+-#ifdef	HAVE_NDBM_H
+-#include <ndbm.h>
+-#endif
+-
+-typedef	DBM	DBMAP;
+-typedef datum DBCHUNK;
+-#define	map_data dptr
+-#define	map_size dsize
+-
+-#endif
+ #endif
+ 
+ #ifndef CONFIG
+-#define CONFIG "/usr/local/etc/desire.conf"
++#define CONFIG "/etc/desire.conf"
+ #endif
+ 
+ #include "desire.h"
+@@ -83,4 +66,3 @@
+ 	char *tmp_format_string;
+ } ctb_sess;
+ 
+-#endif
