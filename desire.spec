@@ -1,61 +1,80 @@
 Summary:	DESIRE - statistics access library
-Summary(pl):	DESIRE - biblioteka, statysytyka dostepu 
+Summary(pl):	DESIRE - biblioteka, statystyka dostêpu 
 Name:		desire
 Version:	3.1
 Release:	0.5
-License:	???
+License:	BSD-like
 Group:		Libraries
 Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	âÉÂÌÉÏÔÅËÉ
+Group(uk):	â¦ÂÌ¦ÏÔÅËÉ
 Source0:	http://www.spelio.net.ru/soft/%{name}-%{version}.tar.gz
 Patch0:		%{name}-QnD.patch
 Patch1:		%{name}-DESTDIR.patch
+URL:		http://www.spelio.net.ru/soft/#DESIRE
 BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool
 BuildRequires:	gd-devel >= 2.0.1
 BuildRequires:	gd-static >= 2.0.1
 BuildRequires:	libstrfunc-devel
 BuildRequires:	db3-devel
-
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_cgidir		/home/httpd/cgi-bin
 %define		_logdir		/var/log/desire
 
 %description
-Package includes:
- - The library, libdesire, with header files
- - Display library, libddraw, customizable at run time
- - The set of dependent programs:
-   - Proxy (Squid, OOPS) accounting convertor and graphics generator
-   - Cisco ip accounting converter and graphics generator
-   - Helper utilities
+Package includes main library (libdesire) and display library,
+libddraw, customizable at run time.
+
+%description -l pl
+Pakiet zawiera g³ówn± bibliotekê (libdesire) i bibliotekê do
+rysowania, libddraw, konfigurowaln± w locie.
 
 %package devel
 Summary:	Development part of the desire library
 Summary(pl):	Czê¶æ biblioteki desire przeznaczona dla developerów
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
 
 %description devel
 This package contains the files needed for development of programs
 linked against desire.
 
+%description devel -l pl
+Ten pakiet zawiera pliki potrzebne do kompilowania programów z
+bibliotek± desire.
+
 %package static
 Summary:	Static desire library
 Summary(pl):	Statyczna biblioteka desire
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
 
 %description static
 This package contains static desire library.
+
+%description static -l pl
+Ten pakiet zawiera statyczn± bibliotekê desire.
 
 %package progs
 Summary:	Utility programs that use desire
@@ -67,7 +86,16 @@ Requires:	%{name} = %{version}
 Requires:	apache
 
 %description progs
-These are utility programs supplied with desire.
+These are utility programs supplied with desire:
+ - Proxy (Squid, OOPS) accounting convertor and graphics generator
+ - Cisco ip accounting converter and graphics generator
+ - Helper utilities
+
+%description progs -l pl
+Tutaj s± programy dostarczone z desire:
+ - Konwerter i generator graficznych statystyk z Proxy (Squid, OOPS)
+ - Konwerter i generator grafik z Cisco
+ - programy pomocnicze
 
 %prep
 %setup -q 
