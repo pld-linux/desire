@@ -6,6 +6,7 @@ Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://www.spelio.net.ru/soft/%{name}-%{version}.tar.gz
+# Source0-md5:	86fde160bb54f868a6a9ba2bc2925ec2
 Patch0:		%{name}-QnD.patch
 Patch1:		%{name}-DESTDIR.patch
 URL:		http://www.spelio.net.ru/soft/#DESIRE
