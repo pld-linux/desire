@@ -1,5 +1,5 @@
 Summary:	DESIRE - statistics access library
-Summary(pl):	DESIRE - biblioteka, statystyka dostêpu 
+Summary(pl):	DESIRE - biblioteka, statystyka dostêpu
 Name:		desire
 Version:	3.1
 Release:	0.6
@@ -75,8 +75,8 @@ Tutaj s± programy dostarczone z desire:
  - programy pomocnicze
 
 %prep
-%setup -q 
-%patch0 -p1 
+%setup -q
+%patch0 -p1
 %patch1 -p1
 
 %build
