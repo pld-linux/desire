@@ -95,7 +95,7 @@ install -d $RPM_BUILD_ROOT%{_cgidir}/{cistat,proxy_stats} \
 	$RPM_BUILD_ROOT%{_logdir}/{calls,traffic,dialup/Usres,proxy/Domains}
 
 %{__make} install \
-        DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT
 
 install depend/cistat/html/* $RPM_BUILD_ROOT%{_cgidir}/cistat
 install depend/proxy_stats/html/* $RPM_BUILD_ROOT%{_cgidir}/proxy_stats
@@ -105,8 +105,8 @@ touch $RPM_BUILD_ROOT%{_sysconfdir}/DOMAINS
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
