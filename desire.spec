@@ -98,8 +98,8 @@ install -d $RPM_BUILD_ROOT%{_cgidir}/{cistat,proxy_stats} \
 
 install depend/cistat/html/* $RPM_BUILD_ROOT%{_cgidir}/cistat
 install depend/proxy_stats/html/* $RPM_BUILD_ROOT%{_cgidir}/proxy_stats
-install conf/* $RPM_BUILD_ROOT/%{_sysconfdir}
-touch $RPM_BUILD_ROOT/%{_sysconfdir}/DOMAINS
+install conf/* $RPM_BUILD_ROOT%{_sysconfdir}
+touch $RPM_BUILD_ROOT%{_sysconfdir}/DOMAINS
 
 %clean
 rm -rf $RPM_BUILD_ROOT
