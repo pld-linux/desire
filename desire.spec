@@ -6,9 +6,10 @@ Release:	0.5
 License:	???
 Group:		Libraries
 Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
-Source0:	http://www.spelio.net.ru/soft/desire-3.1.tar.gz
+Source0:	http://www.spelio.net.ru/soft/%{name}-%{version}.tar.gz
 Patch0:		%{name}-QnD.patch
 Patch1:		%{name}-DESTDIR.patch
 BuildRequires:	autoconf
@@ -24,13 +25,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Package includes:
-    1. The library, libdesire, with header files
-    2. Display library, libddraw, customizable at run time
-    3. The set of dependent programs:
-	+ Proxy (Squid, OOPS) accounting convertor and graphics
-	  generator
-	+ Cisco ip accounting converter and graphics generator
-	+ Helper utilities
+ - The library, libdesire, with header files
+ - Display library, libddraw, customizable at run time
+ - The set of dependent programs:
+   - Proxy (Squid, OOPS) accounting convertor and graphics generator
+   - Cisco ip accounting converter and graphics generator
+   - Helper utilities
 
 %package devel
 Summary:	Development part of the desire library
