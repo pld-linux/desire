@@ -2,7 +2,7 @@ Summary:	DESIRE - statistics access library
 Summary(pl):	DESIRE - biblioteka, statystyka dostЙpu 
 Name:		desire
 Version:	3.1
-Release:	0.5
+Release:	0.6
 License:	BSD-like
 Group:		Libraries
 Group(de):	Libraries
@@ -68,7 +68,7 @@ Group(pl):	Programowanie/Biblioteki
 Group(pt_BR):	Desenvolvimento/Bibliotecas
 Group(ru):	Разработка/Библиотеки
 Group(uk):	Розробка/Б╕бл╕отеки
-Requires:	%{name} = %{version}
+Requires:	%{name}-devel = %{version}
 
 %description static
 This package contains static desire library.
