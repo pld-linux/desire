@@ -62,7 +62,7 @@ Summary:	Utility programs that use desire
 Summary(pl):	Narzêdzia które u¿ywaj± desire
 Group:		Applications
 Requires:	%{name} = %{version}
-Requires:	apache
+Requires:	webserver = apache
 
 %description progs
 These are utility programs supplied with desire:
