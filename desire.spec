@@ -35,7 +35,7 @@ rysowania, libddraw, konfigurowaln± w locie.
 Summary:	Development part of the desire library
 Summary(pl):	Czê¶æ biblioteki desire przeznaczona dla developerów
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 This package contains the files needed for development of programs
@@ -49,7 +49,7 @@ bibliotek± desire.
 Summary:	Static desire library
 Summary(pl):	Statyczna biblioteka desire
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 This package contains static desire library.
@@ -61,7 +61,7 @@ Ten pakiet zawiera statyczn± bibliotekê desire.
 Summary:	Utility programs that use desire
 Summary(pl):	Narzêdzia które u¿ywaj± desire
 Group:		Applications
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	webserver = apache
 
 %description progs
