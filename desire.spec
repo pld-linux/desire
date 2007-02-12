@@ -1,5 +1,5 @@
 Summary:	DESIRE - statistics access library
-Summary(pl):	DESIRE - biblioteka, statystyka dostêpu
+Summary(pl.UTF-8):   DESIRE - biblioteka, statystyka dostÄ™pu
 Name:		desire
 Version:	3.1
 Release:	2
@@ -27,13 +27,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Package includes main library (libdesire) and display library,
 libddraw, customizable at run time.
 
-%description -l pl
-Pakiet zawiera g³ówn± bibliotekê (libdesire) i bibliotekê do
-rysowania, libddraw, konfigurowaln± w locie.
+%description -l pl.UTF-8
+Pakiet zawiera gÅ‚Ã³wnÄ… bibliotekÄ™ (libdesire) i bibliotekÄ™ do
+rysowania, libddraw, konfigurowalnÄ… w locie.
 
 %package devel
 Summary:	Development part of the desire library
-Summary(pl):	Czê¶æ biblioteki desire przeznaczona dla developerów
+Summary(pl.UTF-8):   CzÄ™Å›Ä‡ biblioteki desire przeznaczona dla developerÃ³w
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -41,25 +41,25 @@ Requires:	%{name} = %{version}-%{release}
 This package contains the files needed for development of programs
 linked against desire.
 
-%description devel -l pl
-Ten pakiet zawiera pliki potrzebne do kompilowania programów z
-bibliotek± desire.
+%description devel -l pl.UTF-8
+Ten pakiet zawiera pliki potrzebne do kompilowania programÃ³w z
+bibliotekÄ… desire.
 
 %package static
 Summary:	Static desire library
-Summary(pl):	Statyczna biblioteka desire
+Summary(pl.UTF-8):   Statyczna biblioteka desire
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 This package contains static desire library.
 
-%description static -l pl
-Ten pakiet zawiera statyczn± bibliotekê desire.
+%description static -l pl.UTF-8
+Ten pakiet zawiera statycznÄ… bibliotekÄ™ desire.
 
 %package progs
 Summary:	Utility programs that use desire
-Summary(pl):	Narzêdzia które u¿ywaj± desire
+Summary(pl.UTF-8):   NarzÄ™dzia ktÃ³re uÅ¼ywajÄ… desire
 Group:		Applications
 Requires:	%{name} = %{version}-%{release}
 Requires:	webserver = apache
@@ -70,8 +70,8 @@ These are utility programs supplied with desire:
  - Cisco ip accounting converter and graphics generator
  - Helper utilities
 
-%description progs -l pl
-Tutaj s± programy dostarczone z desire:
+%description progs -l pl.UTF-8
+Tutaj sÄ… programy dostarczone z desire:
  - Konwerter i generator graficznych statystyk z Proxy (Squid, OOPS)
  - Konwerter i generator grafik z Cisco
  - programy pomocnicze
