@@ -1,5 +1,5 @@
 Summary:	DESIRE - statistics access library
-Summary(pl.UTF-8):   DESIRE - biblioteka, statystyka dostępu
+Summary(pl.UTF-8):	DESIRE - biblioteka, statystyka dostępu
 Name:		desire
 Version:	3.1
 Release:	2
@@ -33,7 +33,7 @@ rysowania, libddraw, konfigurowalną w locie.
 
 %package devel
 Summary:	Development part of the desire library
-Summary(pl.UTF-8):   Część biblioteki desire przeznaczona dla developerów
+Summary(pl.UTF-8):	Część biblioteki desire przeznaczona dla developerów
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -47,7 +47,7 @@ biblioteką desire.
 
 %package static
 Summary:	Static desire library
-Summary(pl.UTF-8):   Statyczna biblioteka desire
+Summary(pl.UTF-8):	Statyczna biblioteka desire
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -59,7 +59,7 @@ Ten pakiet zawiera statyczną bibliotekę desire.
 
 %package progs
 Summary:	Utility programs that use desire
-Summary(pl.UTF-8):   Narzędzia które używają desire
+Summary(pl.UTF-8):	Narzędzia które używają desire
 Group:		Applications
 Requires:	%{name} = %{version}-%{release}
 Requires:	webserver = apache
