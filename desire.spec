@@ -1,3 +1,8 @@
+# TODO:
+# - update to >= 4.0.2
+# - switch to current db
+# - kill gd-static BR
+# - stop using hardcoded /srv subdir by default
 Summary:	DESIRE - statistics access library
 Summary(pl.UTF-8):	DESIRE - biblioteka, statystyka dostępu
 Name:		desire
@@ -5,11 +10,11 @@ Version:	3.1
 Release:	2
 License:	BSD-like
 Group:		Libraries
-Source0:	http://www.spelio.net.ru/soft/%{name}-%{version}.tar.gz
+Source0:	http://lionet.info/soft/%{name}-%{version}.tar.gz
 # Source0-md5:	86fde160bb54f868a6a9ba2bc2925ec2
 Patch0:		%{name}-QnD.patch
 Patch1:		%{name}-DESTDIR.patch
-URL:		http://www.spelio.net.ru/soft/#DESIRE
+URL:		http://lionet.info/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	db3-devel
