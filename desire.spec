@@ -83,8 +83,8 @@ Tutaj są programy dostarczone z desire:
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 %build
 rm -f ltmain.sh aclocal.m4
